@@ -39,7 +39,7 @@ app.get('/crawlerInfo', async function(req, res) {
     res.json(response)
 })
 
-app.listen(port ,() => {
+app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
