@@ -41,7 +41,9 @@ app.post('/crawlerInfo', urlencodeParser, async function(req, res) {
     res.end(JSON.stringify(response))
 })
 
-exports.server = app.listen(port ,() => {
+app.listen(port ,() => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+exports.udnWeb = app;
 
