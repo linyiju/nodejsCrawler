@@ -28,7 +28,7 @@ class undCrawler {
      */
     async praseUdn() {
         try {
-            let URLs = this.undURLs(12)
+            let URLs = this.undURLs(1)
             
             let datas =[]
             for(let element of URLs) {

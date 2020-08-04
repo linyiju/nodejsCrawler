@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const port = 3000
+const port = 8081
 const moment = require('moment')
 
 
@@ -27,7 +27,7 @@ app.post('/process_post', urlencodeParser, function(req, res) {
 })
 
 // Display udnCrawler Informatipn
-app.post('/crawlerInfo', urlencodeParser, async function(req, res) {
+app.get('/crawlerInfo', async function(req, res) {
     let udnCrawler = require(`${__dirname}/crawler/udnCrawler.js`)
     let udn = new udnCrawler()
     let info = await udn.praseUdn()
@@ -36,9 +36,7 @@ app.post('/crawlerInfo', urlencodeParser, async function(req, res) {
         date: moment().format('YYYY-MM-DD'),
         info: info
     }
-    // 解決中字亂碼  
-    res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
-    res.end(JSON.stringify(response))
+    res.json(response)
 })
 
 app.listen(port ,() => {
