@@ -10,6 +10,7 @@ function mainPrase(html) {
         info.content = $(element).find('div.story-list__text p').text().trim()
         info.url = `https://udn.com/${$(element).find('.story-list__text h2 a').attr('href')}`
         info.datetime_pub = moment($(element).find('.story-list__time').text().trim(), 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD HH:mm:ss')
+        info.uniID = ($(element).find('.story-list__text h2 a').attr('href')).split('/')[3]
         infos.push(info)
     })
     return infos;
