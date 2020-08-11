@@ -1,11 +1,56 @@
-exports.testCrawler = async (req, res) => {
+const express = require('express')
+const app = express()
+const port = 3000;
+const moment = require('moment')
+const bodyParser = require('body-parser')
+
+// 創建 application/x-www-form-urlencoded 編碼解析
+const urlencodeParser = bodyParser.urlencoded({ extended: false })
+
+// 放入靜態文件
+app.use('/template', express.static('template'))
+
+// Maine Page
+app.get('/', (req, res) => {
+    res.sendFile(`${__dirname}/template/index.html`)
+})
+
+// Main Page
+app.get('/udnCrawler', async (req, res) => {
     let udnCrawler = require(`${__dirname}/crawler/udnCrawler.js`)
     let udn = new udnCrawler()
-    if(res.status(200)) {
-        let infos = await udn.praseUdn()
-        infos = JSON.stringify(infos)
-        res.status(200).json(infos)
-    } else {
-        res.status(404).send("Fail")
+    let infos = await udn.praseUdn()
+    let today =  moment().format('YYYY-MM-DD')
+    let data = {
+        date: today,
+        data: infos 
     }
-}
+    res.send(data)
+})
+
+// Post
+app.post('/get_data', urlencodeParser, async (req, res) => {
+    let udnCrawler = require(`${__dirname}/crawler/udnCrawler.js`)
+    let udn = new udnCrawler()
+    let infos = await udn.praseUdn()
+    if(req.body.num > infos.length) {
+        res.send(`The length is ${infos.length}. \nYour input number is ${req.body.num}\nYou have to reset the number.`)
+    } else {
+        let response = infos[req.body.num]
+        res.send(response)
+    }
+})
+
+// Get
+// app.get('/getData/', async (req, res) => {
+//     let udnCrawler = require(`${__dirname}/crawler/udnCrawler.js`)
+//     let udn = new udnCrawler()
+//     let infos = await udn.praseUdn()
+//     let response = infos[req.query.num]
+//     res.send(response)
+// })
+
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
