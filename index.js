@@ -1,14 +1,17 @@
 const express = require('express')
 const app = express()
-const port = 3000;
 const moment = require('moment')
 const bodyParser = require('body-parser')
+const path = require('path')
+
+// Port 
+const PORT = process.env.PORT || 8080
 
 // 創建 application/x-www-form-urlencoded 編碼解析
 const urlencodeParser = bodyParser.urlencoded({ extended: false })
 
 // 放入靜態文件
-app.use('/template', express.static('template'))
+app.use('/template', express.static(path.join('template')))
 
 // Maine Page
 app.get('/', (req, res) => {
@@ -51,6 +54,8 @@ app.post('/get_data', urlencodeParser, async (req, res) => {
 // })
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
 })
+
+exports.udnTest = app;
