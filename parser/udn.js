@@ -6,7 +6,7 @@ function mainPrase(html) {
     let infos = []
     $('section.cate-list div.story-list__news').each(function (index, element){
         let info={}
-        info.titles = $(element).find('.story-list__text p').text().trim()
+        info.titles = $(element).find('h2').text().trim()
         info.content = $(element).find('div.story-list__text p').text().trim()
         info.url = `https://udn.com/${$(element).find('.story-list__text h2 a').attr('href')}`
         info.datetime_pub = moment($(element).find('.story-list__time').text().trim(), 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD HH:mm:ss')
@@ -15,5 +15,6 @@ function mainPrase(html) {
     })
     return infos;
 }
+
 
 module.exports = {mainPrase};

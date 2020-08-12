@@ -11,29 +11,31 @@ class undCrawler {
      * Generate udn URLs
      * @param {string} page
      */
-    undURLs(page) {
+    udnURLs(page) {
         let URLs = [];
         for(let i = 0; i <= page; i++) {
-            let accurate_url = `https://udn.com/news/breaknews/1/${i}`;
-            URLs.push({
-                page:i,
-                url:accurate_url})
+            let accurate_url = `https://udn.com/news/breaknews/${i}`;
+            URLs.push(accurate_url)
         }
         return URLs
     }
 
     /**
      * Main Crawler Function
-     * @param {list} URLs
+     * @page {string} page
      */
-    async praseUdn() {
+    async praseUdn(page) {
+        let URLs
         try {
-            let URLs = this.undURLs(12)
-            
+            if(undefined == page) {
+                URLs = this.udnURLs(12)
+            } else {
+                URLs = [`https://udn.com/news/breaknews/${page}`]
+            }
             let datas =[]
-            for(let element of URLs) {
+            for(let url of URLs) {
                 let options = {
-                    uri:element.url,
+                    uri:url,
                     headers:{
                         'Accept':'text/html',
                         'Accept-charset':'utf8',
