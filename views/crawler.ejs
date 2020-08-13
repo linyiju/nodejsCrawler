@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="icon" href="/public/hand.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>udn Crawler</h1>
+            <table width="400" border="1">
+                <tr>
+                    <td>
+                        <form action="/udnCrawler", method = "GET">
+                            Get all udn news data <button type="submit" class="btn btn-primary">Click me</button>
+                        </form> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/get_page", method="POST">
+                            Get the specific page udn News Data<br>
+                            <strong>Type page number</strong><br>
+                            Page : <input type = "text" name = "page">
+                            <button type="submit" class="btn btn-danger">Get data</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/get_data", method="POST">
+                            Get the specific number udn News Data<br>
+                            <strong>Type number</strong><br>
+                            Num : <input type = "text" name = "num">
+                            <button type="submit" class="btn btn-success">Get data</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        <h5>Source : <a href="https://udn.com/news/breaknews">udn Website</a></h5>
+        <a href="/login">Logout</a>
+    </body>
+</html>
