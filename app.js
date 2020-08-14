@@ -3,7 +3,6 @@ const app = express()
 const moment = require('moment')
 const bodyParser = require('body-parser')
 const path = require('path')
-const crypto = require('crypto')
 const base = require(`${__dirname}/lib/base`)
 const session = require('express-session')
 
@@ -51,8 +50,6 @@ app.post('/crawler', urlencodeParser, async (req, res) => {
     if(pwd != rePwd) {
         res.render('sign', {title: 'Sign'})
     } else {
-        let md5 = crypto.createHash('md5') // 加密
-        pwd = md5.update(pwd).digest('hex')
         await base.saveUser(name, pwd)
         res.render('crawler', {title: 'udn Crawler'})
     }
